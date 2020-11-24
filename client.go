@@ -5,7 +5,7 @@ import (
 	"net/rpc"
 )
 
-type general_cliente struct {
+type General struct {
 	Nombre string
 	Materia string
 	Calificacion float64
@@ -33,15 +33,15 @@ func client() {
 		case 1:
 			fmt.Println("----Agregar Alumno----")
 			var nombre string
-			fmt.Print ( "Nombre alumno: " )
-			fmt.Scan(&nombre)
+			fmt.Println( "Nombre alumno: " )
+			fmt.Scanln(&nombre)
 			var materia string
-			fmt.Print ( "Nombre de la materia: " )
+			fmt.Println( "Nombre de la materia: " )
 			fmt.Scanln(&materia)
 			var calificacion float64
-			fmt.Print( "Calificacion: " )
-			fmt.Scan(&calificacion)
-			alumnoNuevo := general_cliente{nombre, materia, calificacion}
+			fmt.Println( "Calificacion: " )
+			fmt.Scanln(&calificacion)
+			alumnoNuevo := General{nombre, materia, calificacion}
 			var result string
 			err = c.Call( "Server.NuevoAlumno" , alumnoNuevo, &result)
 			if err != nil {
@@ -52,8 +52,8 @@ func client() {
 		case 2:
 			fmt.Println("----Materias de un Alumno----")
 			var nombre string
-			fmt.Print ( "Nombre alumno: " )
-			fmt.Scan(&nombre)
+			fmt.Println( "Nombre alumno: " )
+			fmt.Scanln(&nombre)
 			var result string
 			err = c.Call( "Server.MateriasPorAlumno" , nombre, &result)
 			if err != nil {
@@ -64,50 +64,48 @@ func client() {
 		case 3:
 			fmt.Println("----Mostrar alumnos por materia----")
 			var materia string
-			fmt.Print ( "Nombre de la materia: " )
-			fmt.Scan(&materia)
+			fmt.Println( "Nombre de la materia: " )
+			fmt.Scanln(&materia)
 			var result string
 			err = c.Call( "Server.AlumnosPorMateria" , materia , &result)
 			if err != nil {
-				fmt.Println (err)
+				fmt.Println(err)
 			} else {
-				fmt.Println (result)
+				fmt.Println(result)
 			}
 		case 4:
 			fmt.Println("----Promedio de materia----")
 			var materia string
-			fmt.Print ( "Nombre de la materia: " )
-			fmt.Scan(&materia)
-			var result string
+			fmt.Println( "Nombre de la materia: " )
+			fmt.Scanln(&materia)
+			var result float64
 			err = c.Call( "Server.PromedioPorMateria" , materia , &result)
 			if err != nil {
-				fmt.Println (err)
+				fmt.Println(err)
 			} else {
-				fmt.Println (result)
+				fmt.Println(result)
 			}
 		case 5:
 			fmt.Println("----Promedio de Alumno----")
 			var nombre string
-			fmt.Print ( "Nombre del alumno: " )
-			fmt.Scan(&nombre)
-			var result string
+			fmt.Println( "Nombre del alumno: " )
+			fmt.Scanln(&nombre)
+			var result float64
 			err = c.Call( "Server.PromedioPorAlumno" , nombre , &result)
 			if err != nil {
-				fmt.Println (err)
+				fmt.Println(err)
 			} else {
-				fmt.Println (result)
+				fmt.Println(result)
 			}
 		case 6:
 			fmt.Println("----Promedio de todos los alumnos----")
-			var materia string
-			fmt.Print ( "Nombre de la materia: " )
-			fmt.Scan(&materia)
-			var result string
-			err = c.Call( "Server.PromedioGeneral" , materia , &result)
+			aux := "_"
+			var result float64
+			err = c.Call( "Server.PromedioGeneral" , aux , &result)
 			if err != nil {
-				fmt.Println (err)
+				fmt.Println(err)
 			} else {
-				fmt.Println (result)
+				fmt.Println(result)
 			}
 		case 0:
 			return

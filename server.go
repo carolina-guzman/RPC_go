@@ -9,24 +9,25 @@ import (
 
 
 
-type general struct {
+type General struct {
 	Nombre string
 	Materia string
 	Calificacion float64
 }
 
-type materia struct {
+type Materia struct {
 	Alumno string
 	calificacion float64
 }
 
-type alumno struct {
+type Alumno struct {
 	Materia string
 	calificacion float64
 }
 
-var materias map [ string ][]materia
-var alumnos map [ string ][]alumno
+var materias map [ string ][]Materia
+var alumnos map [ string ][]Alumno
+
 
 type Server struct{}
 
@@ -43,13 +44,13 @@ func ValidarNoRepetido(nombre string , materia string ) string {
 	return "error"
 }
 
-func (this *Server) NuevoAlumno (a general, reply *string) error {
+func (this *Server) NuevoAlumno (a General, reply *string) error {
 	err := ValidarNoRepetido (a.Nombre, a.Materia)
 	if err != "error" {
 		return errors. New (err)
 	}
-	alumnos[a.Nombre] = append (alumnos[a.Nombre], alumno{a.Materia, a.Calificacion})
-	materias[a.Materia] = append (materias[a.Materia], materia{a.Nombre, a.Calificacion})
+	alumnos[a.Nombre] = append (alumnos[a.Nombre], Alumno{a.Materia, a.Calificacion})
+	materias[a.Materia] = append (materias[a.Materia], Materia{a.Nombre, a.Calificacion})
 	* reply = a.Nombre + "asignado a " + a.Materia 
 	return nil
 }
@@ -112,7 +113,7 @@ func (this *Server) PromedioPorMateria(materiaNombre string, reply *float64) err
 }
 
 
-func (this *Server) PromedioGeneral (nombre string , reply * float64 ) error {
+func (this *Server) PromedioGeneral ( aux string , reply * float64 ) error {
 		* reply = 0.0
 		var total float64
 		var counter float64
@@ -146,9 +147,11 @@ func server() {
 	}
 }
 
-func main() {
+func main(){
 
 	go server()
+	materias = make(map [ string ][]Materia )
+	alumnos = make(map [ string ][]Alumno )
 
 	var input string
 	fmt.Scanln(&input)
