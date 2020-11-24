@@ -19,7 +19,7 @@ func client() {
 	}
 	var op int64
 	for {
-		fmt.Println("---------MENU-----------------")
+		fmt.Println("---------------MENU-----------------")
 		fmt.Println("1. Agregar Alumno con materia" )
 		fmt.Println("2. Materias de un alumno" )
 		fmt.Println("3. Mostrar alumnos por materia" )
@@ -31,6 +31,7 @@ func client() {
 
 		switch op {
 		case 1:
+			fmt.Println("----Agregar Alumno----")
 			var nombre string
 			fmt.Print ( "Nombre alumno: " )
 			fmt.Scan(&nombre)
@@ -44,11 +45,12 @@ func client() {
 			var result string
 			err = c.Call( "Server.NuevoAlumno" , alumnoNuevo, &result)
 			if err != nil {
-				fmt. Println (err)
+				fmt.Println (err)
 			} else {
-				fmt. Println (result)
+				fmt.Println (result)
 			}
 		case 2:
+			fmt.Println("----Materias de un Alumno----")
 			var nombre string
 			fmt.Print ( "Nombre alumno: " )
 			fmt.Scan(&nombre)
@@ -60,6 +62,7 @@ func client() {
 				fmt.Println (result)
 			}	
 		case 3:
+			fmt.Println("----Mostrar alumnos por materia----")
 			var materia string
 			fmt.Print ( "Nombre de la materia: " )
 			fmt.Scan(&materia)
@@ -70,13 +73,42 @@ func client() {
 			} else {
 				fmt.Println (result)
 			}
-		
 		case 4:
-
+			fmt.Println("----Promedio de materia----")
+			var materia string
+			fmt.Print ( "Nombre de la materia: " )
+			fmt.Scan(&materia)
+			var result string
+			err = c.Call( "Server.PromedioPorMateria" , materia , &result)
+			if err != nil {
+				fmt.Println (err)
+			} else {
+				fmt.Println (result)
+			}
 		case 5:
-
+			fmt.Println("----Promedio de Alumno----")
+			var nombre string
+			fmt.Print ( "Nombre del alumno: " )
+			fmt.Scan(&nombre)
+			var result string
+			err = c.Call( "Server.PromedioPorAlumno" , nombre , &result)
+			if err != nil {
+				fmt.Println (err)
+			} else {
+				fmt.Println (result)
+			}
 		case 6:
-
+			fmt.Println("----Promedio de todos los alumnos----")
+			var materia string
+			fmt.Print ( "Nombre de la materia: " )
+			fmt.Scan(&materia)
+			var result string
+			err = c.Call( "Server.PromedioGeneral" , materia , &result)
+			if err != nil {
+				fmt.Println (err)
+			} else {
+				fmt.Println (result)
+			}
 		case 0:
 			return
 		}
