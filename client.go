@@ -19,13 +19,14 @@ func client() {
 	}
 	var op int64
 	for {
-		fmt.Println ( "1) Agregar/Asignar alumno y materia" )
-		fmt.Println ( "2) Ver materias por Alumno" )
-		fmt.Println ( "3) Ver alumnos por materia" )
-		fmt.Println ( "4) Promedio de Materia" )
-		fmt.Println ( "5) Promedio de Alumno" )
-		fmt.Println ( "6) Promedio General" )
-		fmt.Println ( "0) Salir" )
+		fmt.Println("---------MENU-----------------")
+		fmt.Println("1. Agregar Alumno con materia" )
+		fmt.Println("2. Materias de un alumno" )
+		fmt.Println("3. Mostrar alumnos por materia" )
+		fmt.Println("4. Promedio de Materia" )
+		fmt.Println("5. Promedio de Alumno" )
+		fmt.Println("6. Promedio General" )
+		fmt.Println("0. Salir" )
 		fmt.Scanln(&op)
 
 		switch op {
@@ -46,10 +47,29 @@ func client() {
 				fmt. Println (err)
 			} else {
 				fmt. Println (result)
-}
+			}
 		case 2:
-			
+			var nombre string
+			fmt.Print ( "Nombre alumno: " )
+			fmt.Scan(&nombre)
+			var result string
+			err = c.Call( "Server.MateriasPorAlumno" , nombre, &result)
+			if err != nil {
+				fmt.Println (err)
+			} else {
+				fmt.Println (result)
+			}	
 		case 3:
+			var materia string
+			fmt.Print ( "Nombre de la materia: " )
+			fmt.Scan(&materia)
+			var result string
+			err = c.Call( "Server.AlumnosPorMateria" , materia , &result)
+			if err != nil {
+				fmt.Println (err)
+			} else {
+				fmt.Println (result)
+			}
 		
 		case 4:
 

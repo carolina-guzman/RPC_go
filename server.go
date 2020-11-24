@@ -54,7 +54,7 @@ func (this *Server) NuevoAlumno (a general, reply *string) error {
 	return nil
 }
 
-func (this *Server) MateriasPorAlumno(name string, reply *uint64) error {
+func (this *Server) MateriasPorAlumno(name string, reply *string) error {
 		* reply = ""
 		_ , existe := alumnos[name]
 		if existe{
@@ -63,7 +63,7 @@ func (this *Server) MateriasPorAlumno(name string, reply *uint64) error {
 			}
 			return nil
 		}
-		return errors. New ( "Alumno "+name+ "no registrado" )
+		return errors.New( "Alumno "+name+ "no registrado" )
 }	
 
 func (this *Server) AlumnosPorMateria (nombre string , reply * string ) error {
@@ -75,7 +75,7 @@ func (this *Server) AlumnosPorMateria (nombre string , reply * string ) error {
 			}
 			return nil
 		}
-		return errors. New ( "La materia "+nombre+"no existe" )
+		return errors.New( "La materia "+nombre+"no existe" )
 }
 
 
@@ -95,7 +95,7 @@ func (this *Server) PromedioPorAlumno (nombre string , reply * float64 ) error {
 	return errors. New ( "El alumno "+nombre+"no existe" )
 }
 
-func (this *Server) PromedioPorMateria(materiaNombre string, reply *uint64) error {
+func (this *Server) PromedioPorMateria(materiaNombre string, reply *float64) error {
 	* reply = 0.0
 	var counter float64
 	counter = 0.0
