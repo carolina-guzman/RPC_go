@@ -51,7 +51,7 @@ func (this *Server) NuevoAlumno (a General, reply *string) error {
 	}
 	alumnos[a.Nombre] = append (alumnos[a.Nombre], Alumno{a.Materia, a.Calificacion})
 	materias[a.Materia] = append (materias[a.Materia], Materia{a.Nombre, a.Calificacion})
-	* reply = a.Nombre + "asignado a " + a.Materia 
+	* reply = a.Nombre + " asignado a " + a.Materia 
 	return nil
 }
 
